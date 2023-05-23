@@ -1,25 +1,28 @@
 import './App.css';  
-import {Routes, Route} from 'react-router-dom';
-import Frontend from './components/layouts/Frontend';
-import Admin from './components/layouts/Admin';
-import Homepage from './components/home/Homepage';
-import Dashboard from './components/admin/Dashboard';
-import Login from './components/home/Login';
+import {Routes, Route } from 'react-router-dom'; 
+ 
+import AdminLayout from './pages/admin/AdminLayout';
+import Login from './pages/Login'; 
+import AdminRecordList from './pages/admin/AdminRecordList';
+import AdminTeamList from './pages/admin/AdminTeamList';
+import AdminTechnicalBook from './pages/admin/AdminTechnicalBook';
+import ManageUsers from './pages/admin/ManageUsers';
 // import NotFound from './components/NotFound';
 function App() {
   return (
     <>
      <div className='App'>
-     <Routes>
-       <Route path="/" element={<Frontend/>}>
-          <Route index element={<Homepage/>} />
-          <Route path="login" element={<Login/>}/>
-       </Route>
-       <Route path="/admin" element={<Admin/>}>
-         <Route index element={<Dashboard/>} />
-       </Route>
-       
-     </Routes>
+     <Routes> 
+        <Route path="login" element={<Login/>}/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/admin" element={<AdminLayout/>}>
+           <Route index element={<AdminRecordList/>} />
+           <Route path="recordList" element={<AdminRecordList/>} />
+           <Route path="teamList" element={<AdminTeamList/>} />
+           <Route path="technicalbook" element={<AdminTechnicalBook/>} />
+           <Route path="manageUsers" element={<ManageUsers/>} />
+        </Route> 
+      </Routes>
      </div>
     </>
   );
