@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.98cb21e2.css",
+    "main.js": "/static/js/main.65a7a98c.js",
+    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
+    "static/media/loginBg.png": "/static/media/loginBg.8c0311d4a19d969b0e93.png",
+    "static/media/xls.svg": "/static/media/xls.92efa858e9c1dbaab84b7affbc459b0d.svg",
+    "static/media/newRecord.svg": "/static/media/newRecord.3c7b7e894e73ef0b2f9135e928ecdeac.svg",
+    "static/media/createNewAccount.svg": "/static/media/createNewAccount.61ac2a933c9ab41222e90d69899d4172.svg",
+    "static/media/recordList.svg": "/static/media/recordList.3b66bb76586b1694c91312b2e1c1017f.svg",
+    "static/media/teamList.svg": "/static/media/teamList.0454d388a039d30d83b8535e7f6e718c.svg",
+    "static/media/manageUsers.svg": "/static/media/manageUsers.f60d9ba512e300b2f2a3ea231a49e8c2.svg",
+    "static/media/userIcon.svg": "/static/media/userIcon.9edec91855775d0ba8f5662b87268c9b.svg",
+    "static/media/technicalbook.svg": "/static/media/technicalbook.7beb9ca5d33b1eea57e73a80c8bd94ff.svg",
+    "static/media/passIcon.svg": "/static/media/passIcon.b621828f8fc0ff9bfeb83e2e49e3be06.svg",
+    "static/media/edit.svg": "/static/media/edit.8514139fa88ef63fef0f08ff004b8288.svg",
+    "static/media/logout.svg": "/static/media/logout.6d54024189ce7004cd07859154e6cae8.svg",
+    "index.html": "/index.html",
+    "static/media/check.svg": "/static/media/check.e94e2b1a4e0373023845efcae7a66e90.svg",
+    "static/media/fileIcon.svg": "/static/media/fileIcon.07e7a3b78e6032e6f581f6fc61e49c96.svg",
+    "static/media/barIcon.svg": "/static/media/barIcon.b58103751dc485cb8e003c00855a4234.svg",
+    "static/media/plus.svg": "/static/media/plus.e687a8b4ee5b303989ba15f2ffe282eb.svg",
+    "main.98cb21e2.css.map": "/static/css/main.98cb21e2.css.map",
+    "main.65a7a98c.js.map": "/static/js/main.65a7a98c.js.map",
+    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.98cb21e2.css",
+    "static/js/main.65a7a98c.js"
+  ]
+}
