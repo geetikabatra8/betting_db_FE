@@ -17,7 +17,8 @@ export default function ManageUsers() {
 
     useEffect(() => {
        $(selectRef1.current).niceSelect();
-       getUserRecord();
+       getUserRecord(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps, no-use-before-define
     }, []);
   
     const [getUserRecords,setUserRecords] = useState([]); 
@@ -100,8 +101,9 @@ export default function ManageUsers() {
 
                                                 {getUserRecords && getUserRecords.map(item => {
                                                                 return (
-                                                                    <tr className="whitebgRow">
+                                                                    <tr className="whitebgRow"  key={item.id}>
                                                                     <td className="actions">
+                                                                        {item.id}
                                                                         <div className="tbl-actn">
                                                                             <ul>
                                                                                 <li className="edit-btn">
@@ -135,17 +137,21 @@ export default function ManageUsers() {
         
                                                                 );
                                                  })}
-     <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+                                                  
                                             </tbody>
                                         </Table>
+                                                    <ReactPaginate
+                                                        containerClassName={'pagination'}  
+                                                        subContainerClassName={'pages pagination'} 
+                                                        activeClassName={'active'} 
+                                                        breakLabel="..."
+                                                        nextLabel=">"
+                                                        onPageChange={handlePageClick}
+                                                        pageRangeDisplayed={5}
+                                                        pageCount={pageCount}
+                                                        previousLabel="<"
+                                                        renderOnZeroPageCount={null}
+                                                    />
                                     </div>
                                 </div>
                             </div>

@@ -61,6 +61,12 @@ const getDashboard = (role) => {
   return route;
 }
 
+export const logout = (role) => {
+   localStorage.removeItem('userData');
+   localStorage.removeItem('accessToken');
+}
+
+
 
 axios.interceptors.request.use(function (config) {
     const token = 'Bearer 55454';

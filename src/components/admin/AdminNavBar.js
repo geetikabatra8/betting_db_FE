@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import navBarIcon from "../../assets/images/barIcon.svg";
 import logoutIcon from "../../assets/svgFiles/logout.svg";
+import { logout } from '../../services/authService'; 
 import $ from "jquery";
 function AdminNavBar() {
   // const handleClick = event => {
@@ -11,6 +12,11 @@ function AdminNavBar() {
   const showonclick = event => {
     $("body").find("#root").toggleClass("intro");
   };
+  const logoutUser = () => {
+    // logout().then((response) => { 
+
+    // });
+  }
   // const [show, setShow] = React.useState();
   return (
     <div className="navbar-custom">
@@ -25,7 +31,7 @@ function AdminNavBar() {
         <Col xl="auto">
           <div className="navRightSideBar">
             <div className="hdrLogout">
-              <Link to="/">
+              <Link onClick={logoutUser()}>
                 <span>
                 <img src={logoutIcon} alt="" /> 
                 </span> Logout

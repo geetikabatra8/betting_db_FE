@@ -63,7 +63,7 @@ function AdminSidebar() {
                     </Link>
                   </Accordion.Header>
                 </Accordion.Item>
-                <Accordion.Item eventKey="3" className="active">
+                <Accordion.Item eventKey="3" className="active2" activeClassName="active">
                   <Accordion.Header className="singleLink">
                     <Link to="/admin/recordList">
                       <span> 

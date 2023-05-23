@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, } from "react-router-dom";
 import { Button, Table, Modal, Form, Alert } from "react-bootstrap"; 
-import { postRequest} from '../../services/authService';  
-// import $ from "jquery";
+import { postRequest, getRequest} from '../../services/authService';  
+import ReactPaginate from 'react-paginate'; 
 import plusIcon from "../../assets/svgFiles/plus.svg";
 // import xlsIcon from "../../assets/svgFiles/xls.svg";
 import editIcon from "../../assets/svgFiles/edit.svg";
@@ -22,12 +22,48 @@ require("jquery-nice-select");
 
 export default function AdminTeamList() {
     const selectRef1 = useRef();
+    //------------------------------------------------------------------------------
+    //start load data
+    
     useEffect(() => {
         $(selectRef1.current).niceSelect();
-    }, []);
-    // const handleDelete = (index, e) => {
-    //     e.target.parentNode.parentNode.parentNode.deleteRow(index)
-    // }
+        getUserRecord(); 
+     // eslint-disable-next-line react-hooks/exhaustive-deps, no-use-before-define
+     }, []);
+   
+
+
+    const [getUserRecords,setUserRecords] = useState([]); 
+    const [itemOffset, setItemOffset] = useState(0);
+    const [getPageCount, setPageCount] = useState(0);
+    const itemsPerPage = 5;
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`); 
+    const pageCount = Math.ceil(getPageCount / itemsPerPage);
+    
+    const getUserRecord = () => {
+        getRequest(`https://api.codedruns.com/home/slider?skip=${itemOffset}&limit=${itemsPerPage}`).then((res) => {
+            setPageCount(res.data.count)
+            setUserRecords(res.data.listing); 
+        });
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+    
+
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % getPageCount;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+
+    getUserRecord();
+  };
+ 
+
 
     const [showTeam, setShowTeam] = useState(false);
     const handleCloseTeam = () => setShowTeam(false);
@@ -110,6 +146,8 @@ export default function AdminTeamList() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                {getUserRecords && getUserRecords.map(item => {
+                                                                return (
                                                     <tr className="whitebgRow">
                                                         <td className="actions">
                                                             <div className="tbl-actn">
@@ -132,9 +170,22 @@ export default function AdminTeamList() {
                                                         <td>#56H52</td>
                                                         <td>MLS</td>
                                                     </tr>
-                                                    
+                                                    );
+                                                })}
                                                 </tbody>
                                             </Table>
+                                            <ReactPaginate
+                                                        containerClassName={'pagination'}  
+                                                        subContainerClassName={'pages pagination'} 
+                                                        activeClassName={'active'} 
+                                                        breakLabel="..."
+                                                        nextLabel=">"
+                                                        onPageChange={handlePageClick}
+                                                        pageRangeDisplayed={5}
+                                                        pageCount={pageCount}
+                                                        previousLabel="<"
+                                                        renderOnZeroPageCount={null}
+                                                    />
                                         </div>
                                     </div>
                                 </div>

@@ -1,17 +1,52 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef,useState } from "react";
 import { Link, } from "react-router-dom";
 import {  Table } from "react-bootstrap";
+import ReactPaginate from 'react-paginate';
+import { getRequest} from '../../services/authService';  
 import $ from "jquery";
 window.jQuery = window.$ = $;
 require("jquery-nice-select");
 export default function AdminTechnicalBook() {
     const selectRef1 = useRef();
+    
     useEffect(() => {
         $(selectRef1.current).niceSelect();
-    }, []);
-    // const handleDelete = (index, e) => {
-    //     e.target.parentNode.parentNode.parentNode.deleteRow(index)
-    // }
+        getUserRecord(); 
+     // eslint-disable-next-line react-hooks/exhaustive-deps, no-use-before-define
+     }, []);
+   
+
+
+    const [getUserRecords,setUserRecords] = useState([]); 
+    const [itemOffset, setItemOffset] = useState(0);
+    const [getPageCount, setPageCount] = useState(0);
+    const itemsPerPage = 5;
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`); 
+    const pageCount = Math.ceil(getPageCount / itemsPerPage);
+    
+    const getUserRecord = () => {
+        getRequest(`https://api.codedruns.com/home/slider?skip=${itemOffset}&limit=${itemsPerPage}`).then((res) => {
+            setPageCount(res.data.count)
+            setUserRecords(res.data.listing); 
+        });
+    }
+
+
+    
+
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % getPageCount;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+
+    getUserRecord();
+  };
+ 
   return (
     <>
  
@@ -50,6 +85,8 @@ export default function AdminTechnicalBook() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                {getUserRecords && getUserRecords.map(item => {
+                                                                return (
                                                     <tr className="whitebgRow">
                                                         <td className="actions">
                                                             <div className="tbl-actn">
@@ -87,9 +124,23 @@ export default function AdminTechnicalBook() {
                                                         <td>123.123.123.123</td>
                                                     </tr>
                                                    
-                                                   
+                                                   );
+                                                })}
+                                                  
                                                 </tbody>
                                             </Table>
+                                            <ReactPaginate
+                                                       containerClassName={'pagination'}  
+                                                       subContainerClassName={'pages pagination'} 
+                                                       activeClassName={'active'} 
+                                                       breakLabel="..."
+                                                       nextLabel=">"
+                                                       onPageChange={handlePageClick}
+                                                       pageRangeDisplayed={5}
+                                                       pageCount={pageCount}
+                                                       previousLabel="<"
+                                                       renderOnZeroPageCount={null}
+                                                   />
                                         </div>
                                     </div>
                                 </div>
